@@ -11,7 +11,7 @@ User have to select process: ['FOLDER', 'FILE', 'TEMPLATE'].
 And free syntax but user have to use flag for statement like: -n "file.txt".
 
 And user can not use one flag with all process:
-    FILE = -n, -e
+    FILE = -n, -e,
     FOLDER = -n
 
     if user gonna use -n flag have to know -n type a string flag
@@ -28,8 +28,8 @@ And user can not use one flag with all process:
 If you wanna create comment line: 
         // Hello! I'm a comment line! 
 
-When using BUILD prefix user does not need to process, just which use flag of -at (Already Template)
-    BUILD -at MVC  <- MVC is a ready template 
+When using BUILD prefix user does not need to process.
+Just which use flag of -at (Already Template): BUILD -at MVC  <- MVC is a ready template 
 
 
 When you are did error in code throw the warn that project .d
