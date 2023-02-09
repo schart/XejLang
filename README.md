@@ -10,7 +10,7 @@ User have to select process: ['FOLDER', 'FILE', 'TEMPLATE'].
 
 And free syntax but user have to use flag for statement like: -n "file.txt".
 
-![](https://github.com/schart/Images/blob/main/syntaxOfXejLang.png)
+![ScreenShot](https://github.com/schart/Images/blob/main/syntaxOfXejLang.png)
 
 And user can not use one flag with all process:
     FILE = -n, -e,
