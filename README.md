@@ -29,7 +29,8 @@ If you wanna create comment line:
         // Hello! I'm a comment line! 
 
 When using BUILD prefix user does not need to process.
-Just which use flag of -at (Already Template): BUILD -at MVC  <- MVC is a ready template 
+Just which use flag of -at (Already Template): 
+        BUILD -at MVC  <- MVC is a ready template 
 
 
 When you are did error in code throw the warn that project .d
