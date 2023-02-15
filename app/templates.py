@@ -9,10 +9,9 @@ class Templates:
         self.mvc = ["Model", "View", "Controller"]
         self.mvt = ["Model", "View", "Template"]
 
-    def builder(self, _chooses: str, _parentDir: str):
-        os.mkdir(_parentDir)
-        for i in _chooses:
-            os.mkdir(_parentDir+'/'+i)
+    def builder(self, _chooses: str, _parentDir: str): 
+            os.mkdir(_parentDir)
+            for i in _chooses:  os.mkdir(_parentDir+'/'+i)
 
     def build(self, _prefix: str = "BUILD", _flag: str = None, _template: str = None) -> None:
         print("BUILDED: ", _flag, _template)
@@ -34,16 +33,14 @@ class Templates:
     def delete(self, _prefix: str = "DELETE",  _process: str = None, _flags: dict = {None, None}) -> None:
         print("DELETED: ", _flags)
         
-        for i in _flags:
+        for i in _flags: 
             arg: any = _flags[i].split('"')[1]
+
             try: 
-                if _process.lower() == 'folder':
-                    shutil.rmtree(os.getcwd()+'/'+arg)
+                if _process.lower() == 'folder': shutil.rmtree(os.getcwd()+'/'+arg)
+                if _process.lower() == 'file':  os.remove(os.getcwd()+'/'+arg)
 
-                if _process.lower() == 'file': 
-                    os.remove(os.getcwd()+'/'+arg)
-
-            except: print("File not found: ", arg)
+            except: self.errors.error_filenotFound(_arg=arg)
 
 
 
