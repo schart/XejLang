@@ -58,12 +58,12 @@ class Templates:
                 
 
                 if flag == 'n':
-                    name = _flags[i].replace('"', "") 
                     
                     try: 
+                        name = _flags[i].replace('"', "") 
                         f = open(os.getcwd()+'\\'+name, "w")
                         f.close()
-                    except: return print("Already exist file") 
+                    except: return self.errors.error_alreadyFile(_arg=name) 
                 
                 if flag == 'e':
                     file_name: str = _flags[i][0].replace('"', "") 
@@ -74,13 +74,11 @@ class Templates:
                         f = open(os.getcwd()+'\\'+file_name, "a")
                         f.write(file_description)
                         f.close()
-                    else: return self.errors(_arg=file_name)
+                    else: return self.errors.error_filenotFound(_arg=file_name)
                 
             else: 
-                try: 
-
-                    os.mkdir(os.getcwd()+'/'+name)
-                except: self.errors(_arg=file_name) #print("File not found: ")
+                try: name = _flags[i].replace('"', ""); os.mkdir(os.getcwd()+'/'+name)
+                except: self.errors.error_alreadyFile(_arg=name) 
 
         z+=1
 
