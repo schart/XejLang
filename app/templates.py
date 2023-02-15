@@ -2,6 +2,7 @@ import os
 import shutil
 
 
+
 class Templates: 
     def __init__(self) -> None:
         self.mvc = ["Model", "View", "Controller"]
@@ -72,7 +73,7 @@ class Templates:
                         f = open(os.getcwd()+'\\'+file_name, "a")
                         f.write(file_description)
                         f.close()
-                    else: return print("File not found")
+                    else: return print("File not found: ", file_name)
                 
             else: 
                 try: 
