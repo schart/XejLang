@@ -1,10 +1,11 @@
 import os
 import shutil
-
+from errors import Errors
 
 
 class Templates: 
     def __init__(self) -> None:
+        self.errors = Errors()
         self.mvc = ["Model", "View", "Controller"]
         self.mvt = ["Model", "View", "Template"]
 
@@ -73,13 +74,13 @@ class Templates:
                         f = open(os.getcwd()+'\\'+file_name, "a")
                         f.write(file_description)
                         f.close()
-                    else: return print("File not found: ", file_name)
+                    else: return self.errors(_arg=file_name)
                 
             else: 
                 try: 
 
                     os.mkdir(os.getcwd()+'/'+name)
-                except: print("File not found: ")
+                except: self.errors(_arg=file_name) #print("File not found: ")
 
         z+=1
 
