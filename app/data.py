@@ -21,7 +21,7 @@ class Data:
         for i in data_files:  
             
             with open(self.path+i, 'r') as f:
-                _result: any = f.readlines(); _detect_comment: any; _list: list = []; _editedList: list = [];
+                _result: any = f.readlines(); _detect_comment: any; _list: list = [];  
                 
                 for i in _result:
 
@@ -30,11 +30,8 @@ class Data:
                     if _detect_comment == '//' or _line == '':  continue; 
                     else: _list.append(i.rstrip().lstrip().split(' ')); 
                 
-
+                
                 return list(_list)
-
-
-
 
     def iterator(self, _iterator: int) -> list:
         if _iterator > len(self.reader()): return None
@@ -43,7 +40,7 @@ class Data:
             return list(next_list)   
 
 
-    def edit(self, _count: int) -> list: #! return list as edited
+    def checkAndTurn(self, _count: int) -> list: #! return list as edited
         readedList = self.iterator(_count)
         if readedList == None: return None
         else:
@@ -51,5 +48,3 @@ class Data:
                 try: readedList.remove('')
                 except: return [list(readedList), len(self.reader())] 
 
-
-print(Data().reader())
