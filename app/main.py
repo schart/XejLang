@@ -65,7 +65,7 @@ class Main:
         else: 
             try: 
                 self.counterListlement+=1; 
-                self.add_text(current_text=DataClass.edit(_count=self.counterListlement)[0]); self.lineLength = DataClass.edit(_count=self.counterListlement)[1];
+                self.add_text(current_text=DataClass.checkAndTurn(_count=self.counterListlement)[0]); self.lineLength = DataClass.checkAndTurn(_count=self.counterListlement)[1];
                 self.counterCurrentText = 0
             except:  self.text = None
 
@@ -198,7 +198,6 @@ class Main:
                             
                         else:  
                             if (self.text[self.counterCurrentText-2] in flags) == False: return errors.error_flag(_line=n+1, _word=self.element) 
-                            #if self.element != "-n" and self.element and (self.text[self.counterCurrentText-2] in flags) == True: return print(f"you are can't use that {self.element} flag with DELETE proccess") 
 
                     templates.delete(_process=self.process, _flags=self.flag)
                 else: return errors.error_process(_line=n+1, _word=self.element, _process=process)  
