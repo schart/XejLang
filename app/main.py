@@ -33,18 +33,19 @@ from data import Data
 class Main:
     def __init__(self) -> None:
         #? Counters
-        self.lineLength: int = 0 #? length of all text
-        self.counterCurrentText: int = 0
-        self.counterListlement: int = 0
+        self.lineLength: int = 0; #? length of all text
+        self.counterCurrentText: int = 0;
+        self.counterListlement: int = 0;
 
         #? These keep data relevant with text
-        self.text: None or str = "non-initilazed"
-        self.element: None or str = "non-initilazed"
+        self.text: None or str = "non-initilazed";
+        self.element: None or str = "non-initilazed";
         
         #? result of parsing
-        self.prefix: None or str = None
-        self.flag: None or str or dict[str, any] = {}
-        self.process: None or str = None  #? also know optional arg
+        self.errors = Errors();
+        self.prefix: None or str = None;
+        self.flag: None or str or dict[str, any] = {};
+        self.process: None or str = None;  #? also know optional arg
 
         #? 
         self.unLockSyntax: bool = False
@@ -165,15 +166,14 @@ class Main:
                             if self.element in already_templates: templates.build(_flag=flag, _template=self.element)
                             else: errors.errror_templatenotFound(_line=n+1, _template=self.element)
                         
-                        else: return print(f"Wrong flag {flag} for that process: {self.text[0]}/{self.process}")
+                        else: return self.errors.error_flag(_line=n+1, _word=self.text[0])  
                     
                     else: errors.error_flag(_line=n+1, _word=self.element)
                 
-                else: print(f"You must enter prefix(BUILD) flag(-at) and choose a ready template {already_templates}") 
+                else: self.errors.error_wrongFlag(_flag=flag, _prefix=self.text[0], _templtae=already_templates)
 
             if  self.text[0] == 'DELETE':
-                self.next_element()
-                self.flag = {}
+                self.next_element(); self.flag = {}
 
                 if (self.element in process) == True:
                     self.process = self.element
@@ -188,19 +188,18 @@ class Main:
 
                                 if flags[flag] == "STRING":                                  
                                 
-                                    if self.element[0] == '"' and self.element.endswith('"') == True:  self.flag[f"{flag}-{1}"] = self.element
-                                    else: return errors.error_syntax(_line=n+1, _word=self.element, _secretDescription='You should use syntax like that "arg" if you wanna use flag of string type')
+                                    if self.element[0] == '"' and self.element.endswith('"') == True:  self.flag[f"{flag}-{i}"] = self.element
+                                    else: return self.errors.error_syntax(_line=n+1, _word=self.element, _secretDescription='You should use syntax like that "arg" if you wanna use flag of string type')
                                 
-                                else: self.flag[f"{flag}-{2}"] = self.element #! with another flag       
+                                else: self.flag[f"{flag}-{i}"] = self.element #! with another flag       
                                 
-                            else: return print(f"Wrong flag {flag} for that process: {self.text[0]}/{self.process}")
-                        
+                            else: return self.errors.error_flag(_line=n+1, _word=self.text[0])  
                             
                         else:  
-                            if (self.text[self.counterCurrentText-2] in flags) == False: return errors.error_flag(_line=n+1, _word=self.element) 
+                            if (self.text[self.counterCurrentText-2] in flags) == False: return self.errors.error_flag(_line=n+1, _word=self.element) 
 
                     templates.delete(_process=self.process, _flags=self.flag)
-                else: return errors.error_process(_line=n+1, _word=self.element, _process=process)  
+                else: return self.errors.error_process(_line=n+1, _word=self.element, _process=process)  
             
 
                     
@@ -210,5 +209,3 @@ class Main:
 if __name__ == '__main__':
         Main().parser()
         #_result = Main.parser();  
-
-
